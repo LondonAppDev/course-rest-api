@@ -1,4 +1,4 @@
-# Code for Profiles Example API project #
+# Code for Profiles Project #
 
 A REST API that supports the following:
  * Creating new profiles.
