@@ -85,3 +85,13 @@ class StatusUpdate(models.Model):
     user_profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
     status_text = models.CharField(max_length=255)
     created_on = models.DateTimeField(auto_now_add=True)
+
+
+class Message(models.Model):
+    """A users message from one user to another."""
+
+    sender = models.ForeignKey('UserProfile', related_name='fk_message_sender')
+    recipient = models.ForeignKey(
+        'UserProfile', related_name='fk_message_recipient')
+    message = models.CharField(max_length=255)
+    date_sent = models.DateTimeField(auto_now_add=True)
