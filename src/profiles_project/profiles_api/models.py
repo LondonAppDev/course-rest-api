@@ -79,7 +79,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
         return self.email
 
 
-class StatusUpdate(models.Model):
+class ProfileFeedItem(models.Model):
     """A users status update."""
 
     user_profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
