@@ -10,5 +10,5 @@ router.register('profile', views.UserProfileViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
-    url(r'^token/', auth_views.obtain_auth_token),
+    url(r'^token/', views.LoginView.as_view()),
 ]

@@ -4,7 +4,7 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework import viewsets
+from rest_framework import viewsets, renderers
 # Create your views here.
 
 from . import serializers, models
@@ -23,9 +23,7 @@ class UserProfileViewSet(viewsets.ModelViewSet):
 class LoginView(ObtainAuthToken):
     """Handles user logins."""
 
-    renderer_classes = (renderers.JSONRenderer, renderers)
-
-
+    renderer_classes = (renderers.JSONRenderer, renderers.BrowsableAPIRenderer)
 
 
 class UserProfileFeedViewSet(viewsets.ModelViewSet):
