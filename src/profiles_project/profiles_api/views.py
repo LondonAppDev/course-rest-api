@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
+from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -17,6 +18,14 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     permission_classes = (IsOwnerOrReadOnly,)
     serializer_class = serializers.UserProfileSerializer
     queryset = models.UserProfile.objects.all()
+
+
+class LoginView(ObtainAuthToken):
+    """Handles user logins."""
+
+    renderer_classes = (renderers.JSONRenderer, renderers)
+
+
 
 
 class UserProfileFeedViewSet(viewsets.ModelViewSet):
