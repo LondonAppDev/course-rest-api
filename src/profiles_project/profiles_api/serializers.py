@@ -25,3 +25,9 @@ class UserProfileSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
+
+
+class ProfileFeedItemSerializer(serializers.ModelSerializer):
+    """A serializer for a profile feed item."""
+
+    pass

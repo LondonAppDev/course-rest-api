@@ -4,11 +4,21 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework import viewsets, renderers
 # Create your views here.
 
 from . import serializers, models
 from profiles_api.permissions import IsOwnerOrReadOnly
+
+
+class HelloApiView(APIView):
+    """Test API View."""
+
+    def get(self, request, format=None):
+        """Return a hello message."""
+
+        return Response({'response': 'hello'})
 
 
 class UserProfileViewSet(viewsets.ModelViewSet):
