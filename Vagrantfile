@@ -33,6 +33,7 @@ Vagrant.configure("2") do |config|
 
     # Install and configure python virtualenvwrapper.
     sudo pip install virtualenvwrapper
+
     if ! grep -q VIRTUALENV_ALREADY_ADDED /home/ubuntu/.bashrc; then
         echo "# VIRTUALENV_ALREADY_ADDED" >> /home/ubuntu/.bashrc
         echo "WORKON_HOME=~/.virtualenvs" >> /home/ubuntu/.bashrc
