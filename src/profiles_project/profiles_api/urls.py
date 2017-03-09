@@ -7,9 +7,11 @@ from . import views
 
 router = DefaultRouter()
 router.register('profile', views.UserProfileViewSet)
+router.register(
+    'hello-viewset', views.HelloViewSet, base_name="hello-view-set")
 
 urlpatterns = [
-    url(r'^', include(router.urls)),
-    url(r'^hello/', views.HelloApiView.as_view()),
+    url(r'^hello-view/', views.HelloApiView.as_view()),
     url(r'^token/', views.LoginView.as_view()),
+    url(r'', include(router.urls)),
 ]

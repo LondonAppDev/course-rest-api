@@ -18,7 +18,16 @@ class HelloApiView(APIView):
     def get(self, request, format=None):
         """Return a hello message."""
 
-        return Response({'response': 'hello'})
+        return Response({'viewtype': 'apiview'})
+
+
+class HelloViewSet(viewsets.ViewSet):
+    """Test API ViewSet."""
+
+    def list(self, request):
+        """Return a hello message."""
+
+        return Response({'view-type': 'viewset'})
 
 
 class UserProfileViewSet(viewsets.ModelViewSet):
@@ -28,6 +37,15 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     permission_classes = (IsOwnerOrReadOnly,)
     serializer_class = serializers.UserProfileSerializer
     queryset = models.UserProfile.objects.all()
+
+
+class LoginViewSet(viewsets.ViewSet):
+    """Handles creating and returning user authentication tokens."""
+
+    def create(self, request):
+        """Check the email and password and return an auth token."""
+
+        return Response({})
 
 
 class LoginView(ObtainAuthToken):
