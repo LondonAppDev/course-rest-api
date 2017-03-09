@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -42,10 +43,12 @@ class UserProfileViewSet(viewsets.ModelViewSet):
 class LoginViewSet(viewsets.ViewSet):
     """Handles creating and returning user authentication tokens."""
 
+    serializer_class = AuthTokenSerializer
+
     def create(self, request):
         """Check the email and password and return an auth token."""
 
-        return Response({})
+        return ObtainAuthToken().post(request)
 
 
 class LoginView(ObtainAuthToken):
