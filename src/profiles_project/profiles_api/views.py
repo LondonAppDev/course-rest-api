@@ -19,7 +19,12 @@ class HelloApiView(APIView):
     def get(self, request, format=None):
         """Return a hello message."""
 
-        return Response({'viewtype': 'apiview'})
+        return Response({'message': 'Hello!'})
+
+    def post(self, request):
+        """Create a hello message with our name in it."""
+
+        data = request.data
 
 
 class HelloViewSet(viewsets.ViewSet):
@@ -49,12 +54,6 @@ class LoginViewSet(viewsets.ViewSet):
         """Check the email and password and return an auth token."""
 
         return ObtainAuthToken.post(request)
-
-
-class LoginView(ObtainAuthToken):
-    """Handles user logins."""
-
-    renderer_classes = (renderers.JSONRenderer, renderers.BrowsableAPIRenderer)
 
 
 class UserProfileFeedViewSet(viewsets.ModelViewSet):
