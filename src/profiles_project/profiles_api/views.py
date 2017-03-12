@@ -10,7 +10,7 @@ from rest_framework import viewsets, renderers, status
 # Create your views here.
 
 from . import serializers, models
-from profiles_api.permissions import IsOwnerOrReadOnly
+from . import permissions
 
 
 class HelloApiView(APIView):
@@ -78,7 +78,7 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     """Handles creating, reading and updating profiles."""
 
     authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsOwnerOrReadOnly,)
+    permission_classes = (permissions.UpdateOwnProfile,)
     serializer_class = serializers.UserProfileSerializer
     queryset = models.UserProfile.objects.all()
 
@@ -91,7 +91,7 @@ class LoginViewSet(viewsets.ViewSet):
     def create(self, request):
         """Check the email and password and return an auth token."""
 
-        return ObtainAuthToken.post(request)
+        return ObtainAuthToken().post(request)
 
 
 class UserProfileFeedViewSet(viewsets.ModelViewSet):
@@ -100,3 +100,4 @@ class UserProfileFeedViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
     serializer_class = serializers.ProfileFeedItemSerializer
     queryset = models.ProfileFeedItem.objects.all()
+    permission_classes = (permissions.PostOwnStatus,)
