@@ -3,6 +3,10 @@ from rest_framework import serializers
 from . import models
 
 
+class HelloSerializer(serializers.Serializer):
+    name = serializers.CharField(max_length=10)
+
+
 class UserProfileSerializer(serializers.ModelSerializer):
     """A serializer for our profile object."""
 
