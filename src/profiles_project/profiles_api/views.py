@@ -7,8 +7,8 @@ from rest_framework.permissions import (IsAuthenticated,
                                         IsAuthenticatedOrReadOnly)
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import viewsets, renderers, status
-# Create your views here.
+from rest_framework.decorators import list_route
+from rest_framework import viewsets, renderers, status, filters
 
 from . import serializers, models
 from . import permissions
@@ -34,7 +34,7 @@ class HelloApiView(APIView):
     def post(self, request):
         """Create a hello message with our name in it."""
 
-        serializer = self.serializer_class(data=request.data)
+        serializer = serializers.HelloSerializer(data=request.data)
         if serializer.is_valid():
             name = serializer.data.get('name')
             message = 'Hello {0}!'.format(name)
@@ -64,7 +64,7 @@ class HelloViewSet(viewsets.ViewSet):
     def create(self, request):
         """Create a new hello message."""
 
-        serializer = self.get_serializer(data=request.data)
+        serializer = serializers.HelloSerializer(data=request.data)
 
         if serializer.is_valid():
             name = serializer.data.get('name')
@@ -82,6 +82,8 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.UpdateOwnProfile,)
     serializer_class = serializers.UserProfileSerializer
     queryset = models.UserProfile.objects.all()
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name', 'email',)
 
 
 class LoginViewSet(viewsets.ViewSet):
