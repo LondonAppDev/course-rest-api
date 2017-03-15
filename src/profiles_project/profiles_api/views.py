@@ -44,6 +44,21 @@ class HelloApiView(APIView):
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             # For a list of status-codes: http://www.django-rest-framework.org/api-guide/status-codes/  # noqa
 
+    def put(self, request, pk):
+        """Put request typically used to entirely replace the object."""
+
+        return Response({'method_type': 'put'})
+
+    def patch(self, request, pk=None):
+        """Patch request, only updates the fields required in the request."""
+
+        return Response({'method_type': 'patch'})
+
+    def delete(self, request, pk=None):
+        """Deletes an object."""
+
+        return Response({'http_method': 'delete'})
+
 
 class HelloViewSet(viewsets.ViewSet):
     """Test API ViewSet."""
@@ -73,6 +88,22 @@ class HelloViewSet(viewsets.ViewSet):
         else:
             return Response(
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def retrieve(self, request, pk=None):
+
+        return Response({'http_method': 'GET'})
+
+    def update(self, request, pk=None):
+
+        return Response({'http_method': 'PUT'})
+
+    def partial_update(self, request, pk=None):
+
+        return Response({'http_method': 'PATCH'})
+
+    def destroy(self, request, pk=None):
+
+        return Response({'http_method': 'DELETE'})
 
 
 class UserProfileViewSet(viewsets.ModelViewSet):
