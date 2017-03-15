@@ -90,13 +90,3 @@ class ProfileFeedItem(models.Model):
         """Return the model as a string."""
 
         return self.status_text
-
-
-class Message(models.Model):
-    """A users message from one user to another."""
-
-    sender = models.ForeignKey('UserProfile', related_name='fk_message_sender')
-    recipient = models.ForeignKey(
-        'UserProfile', related_name='fk_message_recipient')
-    message = models.CharField(max_length=255)
-    date_sent = models.DateTimeField(auto_now_add=True)
